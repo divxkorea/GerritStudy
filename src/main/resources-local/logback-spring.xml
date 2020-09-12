@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+<!-- 	<include resource="org/springframework/boot/logging/logback/defaults.xml" /> -->
+
+	<property name="CUSTOM_LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%-5level ] %logger{16}[%method:%line] - %msg%n" />
+	<property name="CONSOLE_LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%-5level ] %logger{16}[%method:%line] - %msg%n" />
+	<property name="FILE_LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%-5level ] %logger{16}[%method:%line] - %msg%n" />
+	<property name="CONNECT_LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%-5level ] - %msg%n" />
+
+	<property name="LOG_PATH" value="/Logs/" />
+	<property name="LOG_LEVEL" value="DEBUG" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${CUSTOM_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/GerritStudy.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/backup/GerritStudy.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>90</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<charset>utf-8</charset>
+			<pattern>${CUSTOM_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="connectRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/GerritStudy_connect.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/backup/GerritStudy_connect.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>90</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<charset>utf-8</charset>
+			<pattern>${CONNECT_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Application Loggers -->
+	<logger name="com.inumber.scm" level="${LOG_LEVEL}">
+		<appender-ref ref="dailyRollingFileAppender" />
+	</logger>
+
+	<logger name="org.springframework" level="${LOG_LEVEL}">
+		<appender-ref ref="dailyRollingFileAppender" />
+	</logger>
+
+</configuration>
