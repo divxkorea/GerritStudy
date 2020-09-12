@@ -18,7 +18,7 @@ public class HomeController {
 	@GetMapping("/demo")
 	public ModelAndView getDemo() {
 		ModelAndView mv = new ModelAndView();
-		log.info(" TEST ");
+		log.info(" 2121212 ");
 		mv.setViewName("home/demo");
 		return mv;
 	}
