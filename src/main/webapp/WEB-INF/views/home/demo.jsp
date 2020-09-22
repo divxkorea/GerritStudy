@@ -7,12 +7,10 @@
 
 	$(function(){
 		alert("테스트");
-
 		$("#btnSvcChange").on("click", function(e) {
 			var $target = $(this);
 			$target.text("취소");
 		});
-		
 	});
 </script>
 <link rel="icon" type="image/x-icon" href="/resources/static/images/favicon.ico">
