@@ -6,7 +6,7 @@
 <script type="text/javascript">
 
 	$(function(){
-		alert("테스트");
+		alert("테스트1111");
 	});
 </script>
 <title>데모</title>
